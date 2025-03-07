@@ -22,6 +22,14 @@ const SCRIPTED_PROGRESSION_ITEMS: Dictionary = {
 	4: EXTRA_TURN,
 	5: LAFF_BOOST,
 }
+const PETE_PROGRESSION_ITEMS: Dictionary = {
+	0: null,
+	1: EXTRA_TURN,
+	2: null,
+	3: POINT_BOOST,
+	4: EXTRA_TURN,
+	5: LAFF_BOOST,
+}
 
 var opened := false
 
@@ -38,6 +46,7 @@ func body_entered(body: Node3D) -> void:
 	opened = true
 
 func open():
+	print("i detect the pete ", Util.player.stats.peteprogression)
 	AudioManager.play_sound(SFX_OPEN.load())
 	s_opened.emit()
 	$AnimationPlayer.play('open')
@@ -47,8 +56,11 @@ func open():
 	$Item.add_child(item)
 
 func assign_item(world_item: WorldItem):
-	if scripted_progression and SCRIPTED_PROGRESSION_ITEMS[Util.floor_number] != null:
-		var scripted_item: Item = SCRIPTED_PROGRESSION_ITEMS[Util.floor_number]
+	# throwing up simulator
+	var progression_items := PETE_PROGRESSION_ITEMS if Util.player.stats.peteprogression else SCRIPTED_PROGRESSION_ITEMS
+
+	if scripted_progression and progression_items[Util.floor_number] != null:
+		var scripted_item: Item = progression_items[Util.floor_number]
 		# 5th floor has a +8 laff boost
 		if scripted_item == LAFF_BOOST:
 			scripted_item = scripted_item.duplicate()
@@ -61,10 +73,10 @@ func assign_item(world_item: WorldItem):
 		return
 	world_item.pool = item_pool
 
+
 func _ready() -> void:
 	if is_instance_valid(Util.floor_manager):
 		Util.floor_manager.s_chest_spawned.emit(self)
-
 func vanish() -> void:
 	var dust_cloud = Globals.DUST_CLOUD.load().instantiate()
 	get_tree().get_root().add_child(dust_cloud)

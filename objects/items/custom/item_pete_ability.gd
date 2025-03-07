@@ -1,6 +1,5 @@
 extends ItemScript
 
-const POINT_AWARD := 2
 const EARN_SFX := preload("res://audio/sfx/battle/gags/MG_pos_buzzer.ogg")
 
 func on_collect(_item: Item, _model: Node3D) -> void:
@@ -14,6 +13,9 @@ func setup() -> void:
 
 func _participant_died(participant: Node3D) -> void:
 	if participant is Cog and participant.dna:
+		var POINT_AWARD = ceil(float(Util.floor_number) / 2)
+		print("POINT_AWARD: ", POINT_AWARD)
+		print("FLOOR NUMBER: ", Util.floor_number)
 		_award_points_to_all_tracks(POINT_AWARD)
 		AudioManager.play_sound(EARN_SFX)
 

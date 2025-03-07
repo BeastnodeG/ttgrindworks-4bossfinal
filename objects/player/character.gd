@@ -16,6 +16,9 @@ class_name PlayerCharacter
 func character_setup(player: Player):
 	player.stats.max_hp = starting_laff
 	player.stats.hp = starting_laff
+	#hope this works
+	print("pete time ", player.stats.peteprogression)
+	print(player.stats.peteprogression)
 	dna = dna.duplicate()
 	if has_method(character_name.to_lower().replace(" ", "")):
 		call(character_name.to_lower().replace(" ", ""),player)
@@ -135,4 +138,7 @@ func professorpete(player: Player) -> void:
 	player.stats.gag_cap = 20
 	for track in player.stats.gag_regeneration.keys():
 		player.stats.gag_regeneration[track] = 0
-		player.stats.gag_balance[track] = 20
+		#i'm too lazy to figure out how to get the seed... crucify me.
+		player.stats.gag_balance[track] = RandomNumberGenerator.new().randi_range(6, 15)
+	player.stats.peteprogression = true
+	print("pete time ", player.stats.peteprogression)

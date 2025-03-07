@@ -62,6 +62,9 @@ signal s_luck_changed(new_luck: float)
 # How low do cogs HP need to be to die?
 @export var cog_hp_death_threshold := 0.0
 
+# im going to be sick
+@export var peteprogression = false
+
 ## Sets the player's base gag loadout
 func set_loadout(loadout: GagLoadout) -> void:
 	var gag_dicts := [gags_unlocked, gag_balance, gag_effectiveness, gag_regeneration, gag_vouchers, gag_battle_start_point_boost]
