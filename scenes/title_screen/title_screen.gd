@@ -60,7 +60,7 @@ func _ready() -> void:
 	# If we have a stored character from a "try again" lose prompt,
 	# throw it in here so that they will be in the cog building
 	if Util.stored_try_again_char_name:
-		for character: PlayerCharacter in Globals.TOON_UNLOCK_ORDER:
+		for character: PlayerCharacter in Globals.ALL_TOONS:
 			if character.character_name == Util.stored_try_again_char_name:
 				character = character.duplicate()
 				if character.character_name == "RandomToon":
@@ -159,6 +159,7 @@ func create_toons() -> void:
 	for i in range(toons.size() -1, -1, -1):
 		if i >= SaveFileService.progress_file.characters_unlocked:
 			toons.remove_at(i)
+	toons.append_array(Globals.CUSTOM_TOONS.duplicate())
 
 	var starting_point := (-floorf(toons.size() / 2)) * TOON_SEPARATION
 	if toons.size() % 2 == 0: starting_point += (TOON_SEPARATION / 2.0)

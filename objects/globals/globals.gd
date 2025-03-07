@@ -5,6 +5,7 @@ const VERSION_NUMBER := "v1.0.2"
 ## Holds any value you may want accessible globally and quickly
 
 func _ready() -> void:
+	join_toons()
 	import_custom_cogs()
 	Util.s_floor_started.connect(on_floor_start)
 	print("Game Version: %s" % VERSION_NUMBER)
@@ -27,9 +28,20 @@ const TOON_UNLOCK_ORDER : Array[PlayerCharacter] = [
 	preload('res://objects/player/characters/julius_wheezer.tres'),
 	preload('res://objects/player/characters/barnacle_bessie.tres'),
 	preload('res://objects/player/characters/moe_zart.tres'),
-	preload('res://objects/player/characters/professor_pete.tres'),
 	preload('res://objects/player/characters/testchar.tres')
 ]
+
+const CUSTOM_TOONS : Array[PlayerCharacter] = [
+	preload('res://objects/player/characters/professor_pete.tres')
+]
+
+var ALL_TOONS : Array[PlayerCharacter] = []
+
+func join_toons() -> void:
+	ALL_TOONS.append_array(TOON_UNLOCK_ORDER.duplicate())
+	ALL_TOONS.append_array(CUSTOM_TOONS.duplicate())
+	print(ALL_TOONS)
+	print(CUSTOM_TOONS)
 
 ## Global Cog Pools
 var GRUNT_COG_POOL := LazyLoader.defer("res://objects/cog/presets/pools/grunt_cogs.tres")

@@ -14,11 +14,11 @@
 
 [sub_resource type="Resource" id="Resource_jj61k"]
 script = ExtResource("1_vg416")
-damage = 1.05
-defense = 0.9
-evasiveness = 0.9
+damage = 1.0
+defense = 1.1
+evasiveness = 0.85
 accuracy = 1.0
-speed = 0.95
+speed = 0.9
 max_turns = 3
 max_hp = 25
 hp = 25
@@ -56,8 +56,8 @@ script = ExtResource("1_joak5")
 character_name = "Professor Pete"
 character_summary = "- Gag point capacity begins at 20
 - Forgot to restock
-- Starts with no passive gag point regeneration.
-- Defeating cogs restores gag points.
+- Starts with no passive gag point regeneration
+- Defeating cogs restores gag points
 - Starts with all tracks"
 dna = SubResource("Resource_ax4gq")
 gag_loadout = ExtResource("2_pvta8")

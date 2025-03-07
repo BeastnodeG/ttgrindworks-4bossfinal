@@ -25,8 +25,8 @@ const SCRIPTED_PROGRESSION_ITEMS: Dictionary = {
 const PETE_PROGRESSION_ITEMS: Dictionary = {
 	0: null,
 	1: EXTRA_TURN,
-	2: null,
-	3: POINT_BOOST,
+	2: LAFF_BOOST,
+	3: null,
 	4: EXTRA_TURN,
 	5: LAFF_BOOST,
 }

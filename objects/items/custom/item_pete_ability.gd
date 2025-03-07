@@ -12,6 +12,8 @@ func setup() -> void:
 func _participant_died(participant: Node3D) -> void:
 	if participant is Cog and participant.dna:
 		var POINT_AWARD = ceil(float(Util.floor_number) / 2)
+		if participant.dna.is_mod_cog:
+			POINT_AWARD += 1 
 		print("POINT_AWARD: ", POINT_AWARD)
 		print("FLOOR NUMBER: ", Util.floor_number)
 		_award_points_to_all_tracks(POINT_AWARD)
