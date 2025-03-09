@@ -32,7 +32,7 @@ const TOON_UNLOCK_ORDER : Array[PlayerCharacter] = [
 ]
 
 const CUSTOM_TOONS : Array[PlayerCharacter] = [
-	preload('res://objects/player/characters/professor_pete.tres')
+	preload('res://objects/player/characters/yamashiro.tres')
 ]
 
 var ALL_TOONS : Array[PlayerCharacter] = []

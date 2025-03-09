@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="PlayerCharacter" load_steps=15 format=3 uid="uid://dtqgrt6uc16pe"]
+
+[ext_resource type="Script" uid="uid://o2fe7ud1faj6" path="res://objects/battle/battle_resources/stats.gd" id="1_mkbrw"]
+[ext_resource type="Script" uid="uid://c8kas2j4io1jh" path="res://objects/toon/clothing/toon_bottoms.gd" id="2_f3lfo"]
+[ext_resource type="Script" uid="uid://yg7gxug4rab" path="res://objects/toon/toon_dna.gd" id="2_wv7u6"]
+[ext_resource type="Texture2D" uid="uid://dnxbqd0rxpw28" path="res://models/toon/textures/clothes/skirts/sellbotuniform_skirt.png" id="3_loghm"]
+[ext_resource type="Resource" uid="uid://tyi7ukxtvcgc" path="res://objects/battle/battle_resources/gag_loadouts/loadouts/standard_loadout.tres" id="3_q4y7x"]
+[ext_resource type="Script" uid="uid://ts8xpgftpmty" path="res://objects/player/character.gd" id="4_01v70"]
+[ext_resource type="Script" uid="uid://combwqypom1ru" path="res://objects/items/classes/item.gd" id="5_k6uqs"]
+[ext_resource type="Script" uid="uid://dfqwh4jmdy0iw" path="res://objects/toon/clothing/toon_shirt.gd" id="5_sbivw"]
+[ext_resource type="Texture2D" uid="uid://5p1a2uxqe3cu" path="res://models/toon/textures/clothes/shirts/sellbotuniform_top.png" id="6_qdrj0"]
+[ext_resource type="Texture2D" uid="uid://yx7eja216bcn" path="res://models/toon/textures/clothes/shirts/sellbotuniform_sleeve.png" id="7_yna50"]
+
+[sub_resource type="Resource" id="Resource_q3qk8"]
+script = ExtResource("1_mkbrw")
+damage = 1.0
+defense = 1.0
+evasiveness = 1.0
+accuracy = 1.0
+speed = 1.0
+max_turns = 3
+max_hp = 25
+hp = 25
+turns = 1
+
+[sub_resource type="Resource" id="Resource_duxld"]
+script = ExtResource("2_f3lfo")
+texture = ExtResource("3_loghm")
+base_color = Color(1, 1, 1, 1)
+color_type = 0
+metadata/_custom_type_script = "uid://c8kas2j4io1jh"
+
+[sub_resource type="Resource" id="Resource_0ma86"]
+script = ExtResource("5_sbivw")
+shirt_texture = ExtResource("6_qdrj0")
+sleeve_texture = ExtResource("7_yna50")
+base_color = Color(1, 1, 1, 1)
+sleeve_color = Color(1, 1, 1, 1)
+color_type = 0
+metadata/_custom_type_script = "uid://dfqwh4jmdy0iw"
+
+[sub_resource type="Resource" id="Resource_gqohd"]
+script = ExtResource("2_wv7u6")
+body_type = 1
+species = 1
+head_index = 2
+eyelashes = true
+skirt = true
+head_color = Color(0.305544, 0.305554, 0.355334, 1)
+torso_color = Color(0.305882, 0.305882, 0.356863, 1)
+leg_color = Color(0.305882, 0.305882, 0.356863, 1)
+shirt = SubResource("Resource_0ma86")
+bottoms = SubResource("Resource_duxld")
+
+[resource]
+script = ExtResource("4_01v70")
+character_name = "Yamashiro"
+character_summary = "- Is Yamashiro
+- Stats are *very* randomized
+- Starts with 2 random items
+- Starts with 2 random tracks"
+dna = SubResource("Resource_gqohd")
+gag_loadout = ExtResource("3_q4y7x")
+starting_laff = 30
+starting_items = Array[ExtResource("5_k6uqs")]([])
+base_stats = SubResource("Resource_q3qk8")
+random_character_stored_name = ""

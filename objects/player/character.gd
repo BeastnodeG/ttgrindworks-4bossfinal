@@ -70,6 +70,43 @@ func randomtoon(player: Player) -> void:
 			
 	# Sneaky way of making sure only gags are randomized later
 	character_name = 'RandomGags'
+#hardcoded but whatever
+func yamashiro(player: Player) -> void:
+	# Randomize stats
+	var random_stats: Array[String] = [
+		'damage', 'defense', 'evasiveness', 'luck', 'speed'
+	]
+	
+		# Set all stats to 0
+	for stat in random_stats:
+		player.stats.set(stat, 0.3)
+	
+	# Randomize stats
+	var good_points := 40
+	var bad_points := 50
+	var point_cost := 0.1
+	print("im literally randomizing yamashiro")
+	while good_points > 0:
+		var stat := random_stats[RandomService.randi_channel('random_stat_rolls') % random_stats.size()]
+		player.stats.set(stat, player.stats.get(stat) + point_cost)
+		good_points -= 1
+	while bad_points > 0:
+		var stat := random_stats[RandomService.randi_channel('random_stat_rolls') % random_stats.size()]
+		player.stats.set(stat, player.stats.get(stat) - point_cost*0.1)
+		bad_points -= 1
+	print('stat randomization done :D')
+	Util.random_stats = player.stats
+	
+	var item_pool: ItemPool = load('res://objects/items/pools/accessories.tres')
+	var slots_taken := []
+	while slots_taken.size() < 2:
+		var item: Item = ItemService.get_random_item(item_pool, true)
+		if not item in starting_items and not item.slot in slots_taken:
+			starting_items.append(item)
+			slots_taken.append(item.slot)
+			
+	# Sneaky way of making sure only gags are randomized later
+	character_name = 'RandomYams'
 
 func randomgags(player: Player) -> void:
 	# Get one random offense and one random support track
@@ -99,6 +136,43 @@ func randomgags(player: Player) -> void:
 	
 	# Reset character name
 	character_name = 'RandomToon'
+	
+	var random_stats: Array[String] = [
+		'damage', 'defense', 'evasiveness', 'luck', 'speed'
+	]
+	# Restore stats
+	if Util.random_stats:
+		for stat in random_stats:
+			player.stats.set(stat, Util.random_stats.get(stat))
+			
+func randomyams(player: Player) -> void:
+	# Get one random offense and one random support track
+	var offense_tracks: Array[Track] = []
+	var support_tracks: Array[Track] = []
+	var selected_tracks: Array[Track] = []
+	for track in gag_loadout.loadout:
+		if track.track_type == Track.TrackType.OFFENSE:
+			offense_tracks.append(track)
+		else:
+			support_tracks.append(track)
+	# Choose two random tracks if either support or offense is empty
+	# Probably won't ever run but yk
+	if offense_tracks.is_empty() or support_tracks.is_empty():
+		var selected_track: Track
+		while selected_tracks.size() < 2 or not selected_track in selected_tracks:
+			selected_track = gag_loadout.loadout[RandomService.randi_channel('true_random') % gag_loadout.loadout.size()]
+			if not selected_track in selected_tracks: selected_tracks.append(selected_track)
+	# Otherwise run like normal
+	else:
+		selected_tracks.append(offense_tracks[RandomService.randi_channel('true_random') % offense_tracks.size()])
+		selected_tracks.append(support_tracks[RandomService.randi_channel('true_random') % support_tracks.size()])
+	
+	# Start player off with anywhere from level 1-3 gags
+	for track in selected_tracks:
+		player.stats.gags_unlocked[track.track_name] += RandomService.randi_channel('true_random') % 2 + 1
+	
+	# Reset character name
+	character_name = 'Yamashiro'
 	
 	var random_stats: Array[String] = [
 		'damage', 'defense', 'evasiveness', 'luck', 'speed'
